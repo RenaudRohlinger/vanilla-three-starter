@@ -1,0 +1,33 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+ "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 326 326">
+  <style>
+      .ll {
+        fill: #2D2D2D;
+      }
+  
+      @media (prefers-color-scheme: dark) {
+        .ll {
+          fill: #fff;
+        }
+        .lgg {
+          stop-color: #fff;
+        }
+      }
+    </style>
+  <defs>
+    <linearGradient id="linear-gradient" x1="195.86" y1="260.86" x2="-172.97" y2="-25.64" gradientTransform="matrix(1 0 0 -1 0 325.89)" gradientUnits="userSpaceOnUse">
+      <stop class='lgg' offset="0" stop-color="#2d2d2d"/>
+      <stop class='lgg' offset="1" stop-color="#2d2d2d" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="clip-path">
+      <path fill="none" d="M28.9 28.9h268.19v268.19H28.9z"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#clip-path)">
+    <path class='ll' d="M217.85 289h-84.4a99.29 99.29 0 0045.11-83.23V36.58H289.3v169.23c0 42.13-29.73 77.7-71.45 83.19z" />
+    <path d="M54.89 261.62c21.7 24.7 62.39 24.73 84.35.26a84.42 84.42 0 0011.68-16.7 97.83 97.83 0 01-7.73-38.18V36.58H34.3V207a82.66 82.66 0 0020.59 54.62z" fill="url(#linear-gradient)"/>
+  </g>
+</svg>
