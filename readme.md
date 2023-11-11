@@ -13,7 +13,7 @@ Clone the repository and install dependencies using `pnpm install`.
 
 ### Development
 
-Run `bun run dev` to start the development server.
+Run `pnpm run dev` to start the development server.
 
 ```
 src/
