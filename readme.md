@@ -15,6 +15,21 @@ Clone the repository and install dependencies using `pnpm install`.
 
 Run `bun run dev` to start the development server.
 
+```
+src/
+├─ canvas/
+│  ├─ renderer.js     # Configures the WebGL renderer.
+│  ├─ scene.js        # Sets up the Three.js scene.
+│  ├─ camera.js       # Camera setup and controls.
+│  ├─ loader.js       # Asset loading management.
+│  ├─ postfx/         # Post-processing effects.
+│  ├─ utils/          # Utility functions and helpers.
+│  └─ meshes/         # Mesh definitions and implementations.
+├─ dom/               # Handles DOM-related functionality.
+├─ constants.js       # Project-wide constant values.
+└─ main.js            # Entry point of the application.
+```
+
 ## Key Features
 
 ### Modular Design
@@ -62,20 +77,5 @@ Update matrices are disabled by default, optimizing performance for static or in
 ### Debug Mode
 
 Includes a toggleable debug mode, providing on-the-fly visualization and diagnostics.
-
-```
-src/
-├─ canvas/
-│  ├─ renderer.js     # Configures the WebGL renderer.
-│  ├─ scene.js        # Sets up the Three.js scene.
-│  ├─ camera.js       # Camera setup and controls.
-│  ├─ loader.js       # Asset loading management.
-│  ├─ postfx/         # Post-processing effects.
-│  ├─ utils/          # Utility functions and helpers.
-│  └─ meshes/         # Mesh definitions and implementations.
-├─ dom/               # Handles DOM-related functionality.
-├─ constants.js       # Project-wide constant values.
-└─ main.js            # Entry point of the application.
-```
 
 This architecture is heavily based on and inspired by [Antipasto](https://github.com/luruke/antipasto), a robust and feature-rich boilerplate for threejs.
