@@ -5,11 +5,6 @@ template, designed for modern web 3D graphics development. Fairly advanced level
 
 ## Getting Started
 
-### Prerequires
-
-- The dev server runs on [vite](https://vitejs.dev/) with [bun](https://bun.sh/)
-- The package manager used is [pnpm](https://pnpm.io/installation)
-
 ### Installation
 
 Clone the repository and install dependencies using `pnpm install`.
