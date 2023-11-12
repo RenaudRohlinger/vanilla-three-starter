@@ -14,7 +14,7 @@ import renderer from '@/canvas/renderer';
 import scene from '@/canvas/scene';
 import trail from '@/canvas/utils/trail';
 
-export default class extends component(Object3D, {
+export class Plane extends component(Object3D, {
   raf: {
     renderPriority: 1,
     fps: Infinity,

@@ -3,7 +3,7 @@ import { Object3D } from 'three';
 import camera from '@/canvas/camera';
 import { component } from '@/canvas/dispatcher';
 import loader from '@/canvas/loader';
-import postfx from '@/canvas/postfx/postfx';
+// import postfx from '@/canvas/postfx/postfx';
 import renderer from '@/canvas/renderer';
 import scene from '@/canvas/scene';
 import { DEBUG_MODE } from '@/constants';
@@ -39,9 +39,9 @@ class Site extends component(null, {
   }
 
   onRaf() {
-    // renderer.render(scene, camera);
+    renderer.render(scene, camera);
     // postprocess
-    postfx.render(scene, camera);
+    // postfx.render(scene, camera);
   }
 
   onLoadEnd() {

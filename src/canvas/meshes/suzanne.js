@@ -6,7 +6,7 @@ import renderer from '@/canvas/renderer';
 import scene from '@/canvas/scene';
 import trail from '@/canvas/utils/trail';
 
-export default class extends component(Object3D, {
+export class Suzanne extends component(Object3D, {
   raf: {
     renderPriority: 1,
     fps: 5,
@@ -84,6 +84,7 @@ export default class extends component(Object3D, {
 
     this.mesh = new Mesh(this.geometry, this.material);
     this.mesh.position.y = 2;
+    this.mesh.scale.setScalar(3);
     this.mesh.updateMatrix();
     this.mesh.matrixAutoUpdate = false;
     renderer.compileAsync(this.mesh, scene).then(() => {
