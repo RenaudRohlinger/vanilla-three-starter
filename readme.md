@@ -25,9 +25,48 @@ src/
 │  ├─ postfx/         # Post-processing effects.
 │  ├─ utils/          # Utility functions and helpers.
 │  └─ meshes/         # Mesh definitions and implementations.
-├─ dom/               # Handles DOM-related functionality.
-├─ constants.js       # Project-wide constant values.
 └─ main.js            # Entry point of the application.
+```
+
+### Example of a mesh:
+
+```js
+import {
+  Mesh,
+  Object3D,
+} from 'three';
+
+import { component } from '@/canvas/dispatcher';
+import renderer from '@/canvas/renderer';
+import scene from '@/canvas/scene';
+
+export class Plane extends component(Object3D, {
+  raf: {
+    renderPriority: 1,
+    fps: Infinity,
+  },
+}) {
+  init() {
+    this.mesh = new Mesh();
+    this.mesh.updateMatrix(); // required since we disabled by default
+    renderer.compileAsync(this.mesh, scene).then(() => { // better compile for GPU
+      this.add(this.mesh);
+    });
+  }
+
+  onRaf() {
+    this.mesh.rotation.x += 0.01; // example of animation
+    this.mesh.updateMatrix();
+  }
+  onResize() {}
+  onDebug({gui}) { // lil-gui debug is now accessible }
+}
+```
+
+Any custom event can be crated and gets emitted like so:
+
+```js
+dispatcher.trigger({ name: 'debug', fireAtStart: true }, { gui });
 ```
 
 ## Key Features
