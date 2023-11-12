@@ -2,12 +2,12 @@
 
 [starter.renaudrohlinger.com](https://starter.renaudrohlinger.com)
 
-This project is an opinionated Vanilla Three.js starter
+This project is an opinionated Vanilla [Three.js](https://github.com/mrdoob/three.js) starter
 template, designed for modern web 3D graphics development. Fairly advanced level, gathering best practices with threejs and with a modular and scalable architecture.
 
 ## Getting Started
 
-The goal with this starter is to make an architecture framework proof. You can find a list of implementaiton with different frameworks in [examples/](https://github.com/RenaudRohlinger/vanilla-three-starter/tree/main/src/examples) folder.
+The goal of this starter is to make an architecture framework proof. You can find a list of examples with different frameworks in [examples](https://github.com/RenaudRohlinger/vanilla-three-starter/tree/main/src/examples) folder.
 
 ### Installation
 
