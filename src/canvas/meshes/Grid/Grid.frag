@@ -102,11 +102,38 @@ void main() {
 
     // Overlay major grid lines, ensuring they remain fully opaque
     // Note: major grid lines are not affected by base color's alpha
-    col = mix(col, u_majorLineColor, majorGrid * (1.0 - minorGrid));
-
-    if (majorGrid > 0. || minorGrid > 0. || length(axisLines) > 0.) {
-      baseAlpha = 1.;
+    col = mix(col, u_majorLineColor, majorGrid );
+    // Overlay minor grid lines, ensuring they remain fully opaque
+    // Note: minor grid lines are not affected by base color's alpha
+    col = mix(col, u_minorLineColor, minorGrid);
+    
+    if (minorGrid > 0.) {
+      // patch for minor grid lines inheriting base color with baseAlpha 0
+      if (baseAlpha == 0.0) {
+          col = vec3(1.) * minorGrid;
+      }
+      baseAlpha = mix(baseAlpha, 1.0, minorGrid);
+      col = mix(col, u_minorLineColor, minorGrid);
     }
+
+    if (majorGrid > 0.) {
+      // patch for minor grid lines inheriting base color with baseAlpha 0
+      if (baseAlpha == 0.0) {
+          col = vec3(1.) * majorGrid;
+      }
+      baseAlpha = mix(baseAlpha, 1.0, majorGrid);
+      col = mix(col, u_majorLineColor, majorGrid);
+    }
+
+    if (length(axisLines) > 0.) {
+      // patch for minor grid lines inheriting base color with baseAlpha 0
+      if (baseAlpha == 0.0) {
+          col = vec3(1.) * length(axisLines);
+      }
+      baseAlpha = mix(baseAlpha, 1.0, length(axisLines));
+      col = mix(col, axisLines, length(axisLines));
+    }
+
     // Set the final fragment color
     // The final baseAlpha value is derived from the base color's baseAlpha
     gColor = vec4(col, baseAlpha);

@@ -38,7 +38,7 @@ export class Grid extends component(Object3D, {
       fragmentShader,
       uniforms: {
         u_baseAlpha: { value: 0.5 },
-        u_majorLineWidth: { value: 0.05 }, // Example default value, adjust as needed
+        u_majorLineWidth: { value: 0.04 }, // Example default value, adjust as needed
         u_minorLineWidth: { value: 0.01 }, // Example default value
         u_axisLineWidth: { value: 0.04 }, // Example default value
         u_axisDashScale: { value: 1.33 }, // Example default value
@@ -67,10 +67,10 @@ export class Grid extends component(Object3D, {
   onDebug({ gui }) {
     const folder = gui.addFolder('Grid');
     folder
-      .add(this.material.uniforms.u_majorLineWidth, 'value', 0, 1)
+      .add(this.material.uniforms.u_majorLineWidth, 'value', 0, 0.2)
       .name('Major Line Width');
     folder
-      .add(this.material.uniforms.u_minorLineWidth, 'value', 0, 1)
+      .add(this.material.uniforms.u_minorLineWidth, 'value', 0, 0.2)
       .name('Minor Line Width');
     folder
       .add(this.material.uniforms.u_axisLineWidth, 'value', 0, 1)
