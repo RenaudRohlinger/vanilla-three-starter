@@ -37,21 +37,17 @@ export class Grid extends component(Object3D, {
       vertexShader,
       fragmentShader,
       uniforms: {
-        u_baseAlpha: { value: 0.5 },
-        u_majorLineWidth: { value: 0.04 }, // Example default value, adjust as needed
+        u_baseAlpha: { value: 0.0 },
+        u_majorLineWidth: { value: 0.05 }, // Example default value, adjust as needed
         u_minorLineWidth: { value: 0.01 }, // Example default value
-        u_axisLineWidth: { value: 0.04 }, // Example default value
-        u_axisDashScale: { value: 1.33 }, // Example default value
+        u_axisLineWidth: { value: 0.2 }, // Example default value
         u_majorGridDiv: { value: 10.0 }, // Example default value
         u_majorLineColor: { value: new Color(this.config.majorLineColor) }, // White color
         u_minorLineColor: { value: new Color(this.config.minorLineColor) }, // White color
         u_baseColor: { value: new Color(this.config.baseColor) }, // Black color
         u_xAxisColor: { value: new Color(1, 0, 0) }, // Red color
-        u_xAxisDashColor: { value: new Color(0.0, 0, 0) }, // Dark red color
         u_yAxisColor: { value: new Color(0, 1, 0) }, // Green color
-        u_yAxisDashColor: { value: new Color(0, 0.0, 0) }, // Dark green color
         u_zAxisColor: { value: new Color(0, 0, 1) }, // Blue color
-        u_zAxisDashColor: { value: new Color(0, 0, 0.0) }, // Dark blue color
         u_centerColor: { value: new Color(1, 1, 1) }, // White color
       },
     });
@@ -67,19 +63,16 @@ export class Grid extends component(Object3D, {
   onDebug({ gui }) {
     const folder = gui.addFolder('Grid');
     folder
-      .add(this.material.uniforms.u_majorLineWidth, 'value', 0, 0.2)
+      .add(this.material.uniforms.u_majorLineWidth, 'value', 0, 0.05)
       .name('Major Line Width');
     folder
-      .add(this.material.uniforms.u_minorLineWidth, 'value', 0, 0.2)
+      .add(this.material.uniforms.u_minorLineWidth, 'value', 0, 0.05)
       .name('Minor Line Width');
     folder
       .add(this.material.uniforms.u_axisLineWidth, 'value', 0, 1)
       .name('Axis Line Width');
     folder
-      .add(this.material.uniforms.u_axisDashScale, 'value', 0, 10)
-      .name('Axis Dash Scale');
-    folder
-      .add(this.material.uniforms.u_majorGridDiv, 'value', 0, 100)
+      .add(this.material.uniforms.u_majorGridDiv, 'value', 0, 100, 1)
       .name('Major Grid Div');
 
     folder
@@ -107,5 +100,5 @@ export class Grid extends component(Object3D, {
       .name('Minor Line Color');
   }
   onRaf() {}
-  onResize() {}
+  onResize({ width, height }) {}
 }

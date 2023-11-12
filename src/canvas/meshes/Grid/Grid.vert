@@ -3,19 +3,23 @@ precision highp float;
 // Uniforms
 uniform float u_majorGridDiv;
 
-out vec4 v_uv; // Passed to the fragment shader
-
+out vec2 v_uv; // Passed to the fragment shader
+out vec2 v_worldPos;
 void main() {
   vec4 transformed = vec4(position, 1.0);
-    // Convert position to clip space (replacing Unity's UnityObjectToClipPos)
     gl_Position = projectionMatrix * viewMatrix * modelMatrix * transformed;
 
-    float div = max(2.0, round(u_majorGridDiv));
+    vec3 worldPosition = (modelMatrix * transformed).xyz;
+
+    // Adjust world position relative to the camera
+    vec3 cameraRelativeWorldPos = worldPosition - cameraPosition;
+    v_worldPos = worldPosition.xz;
+    // v_worldPos = cameraRelativeWorldPos.xz / u_majorGridDiv;
 
     // Use local position for grid calculations
     vec3 localPos = transformed.xyz;
+    vec3 cameraCenteringOffset = floor(cameraPosition);
+    vec3 cameraSnappedWorldPos = worldPosition.xyz - cameraCenteringOffset;
+    v_uv = cameraSnappedWorldPos.xz;
 
-    vec3 cameraCenteringOffset = floor((vec4(cameraPosition, 1.0)).xyz / div) * div;
-    v_uv.yx = (localPos - cameraCenteringOffset).xy;
-    v_uv.wz = localPos.xy;
 }
