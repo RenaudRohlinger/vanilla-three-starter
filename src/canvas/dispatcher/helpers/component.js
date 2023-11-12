@@ -1,19 +1,4 @@
 import dispatcher from '@/canvas/utils/dispatcher.js';
-import { DEBUG_MODE } from '@/constants.js';
-
-if (DEBUG_MODE) {
-  console.log('🏗️ DEBUG_MODE enabled in @/src/constants.js');
-  import('lil-gui').then((module) => {
-    const gui = new module.GUI();
-
-    dispatcher.trigger(
-      { name: 'debug', fireAtStart: true },
-      {
-        gui,
-      }
-    );
-  });
-}
 
 const defaultRaf = {
   renderPriority: 0,

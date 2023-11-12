@@ -36,6 +36,7 @@ module.exports = {
     'import/newline-after-import': 'error',
     'import/no-duplicates': 'error',
     indent: ['error', 2],
+    'max-len': ['error', { code: 200 }],
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
     semi: ['error', 'always'], // Enforce semicolons

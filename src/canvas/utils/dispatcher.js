@@ -93,4 +93,5 @@ class Dispatcher {
 }
 
 const dispatcherSingleton = new Dispatcher();
+
 export default dispatcherSingleton;

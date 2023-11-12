@@ -102,7 +102,10 @@ class Loader {
     );
 
     const progress = totalBytes > 0 ? (loadedBytes / totalBytes) * 100 : 0;
-    console.log(`⏳ Loading ${progress.toFixed(2)}%`);
+    if (this.currentProgress === progress) {
+      return;
+    }
+    this.currentProgress = progress;
     dispatcher.trigger({ name: 'loadProgress' }, { progress });
   }
 
