@@ -37,7 +37,7 @@ export class Grid extends component(Object3D, {
       vertexShader,
       fragmentShader,
       uniforms: {
-        u_baseAlpha: { value: 0.0 },
+        u_baseAlpha: { value: 0.5 },
         u_majorLineWidth: { value: 0.05 }, // Example default value, adjust as needed
         u_minorLineWidth: { value: 0.01 }, // Example default value
         u_axisLineWidth: { value: 0.2 }, // Example default value
