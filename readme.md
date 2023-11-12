@@ -24,7 +24,8 @@ src/
 │  ├─ loader.js       # Asset loading management.
 │  ├─ postfx/         # Post-processing effects.
 │  ├─ utils/          # Utility functions and helpers.
-│  └─ meshes/         # Mesh definitions and implementations.
+│  ├─ meshes/         # Mesh definitions and implementations.
+│  └─ dispatcher/     # Helpers shared by all components
 └─ main.js            # Entry point of the application.
 ```
 

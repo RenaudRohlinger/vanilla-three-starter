@@ -8,7 +8,7 @@ const tier = async () =>
     // forceMobile: true, // (Development) Force the use of mobile benchmarking scores
   });
 
-const dpr = Math.min(2, window.devicePixelRatio || 1);
+const dpr = Math.min(1.5, window.devicePixelRatio || 1);
 
 const settings = {
   tier,

@@ -4,9 +4,9 @@ import dispatcher from '@/canvas/utils/dispatcher.js';
 import camera from '@/canvas/camera';
 import { component } from '@/canvas/dispatcher';
 import loader from '@/canvas/loader';
-// import postfx from '@/canvas/postfx/postfx';
 import renderer from '@/canvas/renderer';
 import scene from '@/canvas/scene';
+// import postfx from '@/canvas/postfx/postfx';
 
 let stats = null;
 
