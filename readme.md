@@ -7,9 +7,25 @@ template, designed for modern web 3D graphics development. Fairly advanced level
 
 ## Getting Started
 
+The goal with this starter is to make an architecture framework proof. You can find a list of implementaiton with different frameworks in [examples/](https://github.com/RenaudRohlinger/vanilla-three-starter/tree/main/src/examples) folder.
+
 ### Installation
 
 Clone the repository and install dependencies using `pnpm install`.
+
+### Getting started
+
+Anywhere in your code simply init the project:
+
+```js
+import { init, dispatcher } from '/src/main.js';
+init({
+  debug: true,
+});
+dispatcher.on('loadProgress', ({ progress }) => {
+  console.log(`⏳ Loading ${progress.toFixed(2)}%`);
+});
+```
 
 ### Development
 
