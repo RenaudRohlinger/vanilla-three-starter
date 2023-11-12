@@ -28,7 +28,7 @@ src/
 └─ main.js            # Entry point of the application.
 ```
 
-### Example of a mesh:
+### Example of a Mesh:
 
 ```js
 import {
@@ -42,8 +42,8 @@ import scene from '@/canvas/scene';
 
 export class Plane extends component(Object3D, {
   raf: {
-    renderPriority: 1,
-    fps: Infinity,
+    renderPriority: 1, // the order in the main loop
+    fps: Infinity, // can be throttled by specifying the fps
   },
 }) {
   init() {
@@ -54,20 +54,22 @@ export class Plane extends component(Object3D, {
     });
   }
 
-  onRaf() {
+  onRaf({ delta }) {
     this.mesh.rotation.x += 0.01; // example of animation
     this.mesh.updateMatrix();
   }
-  onResize() {}
+  onResize({width, height, ratio}) {}
   onDebug({gui}) { // lil-gui debug is now accessible }
 }
 ```
 
-Any custom event can be crated and gets emitted like so:
+Any custom event can be added and gets emitted like so:
 
 ```js
 dispatcher.trigger({ name: 'debug', fireAtStart: true }, { gui });
 ```
+
+This will call `onDebug` to all the classes extending component or custom listeners `dispatcher.on('debug', () => {}`
 
 ## Key Features
 
