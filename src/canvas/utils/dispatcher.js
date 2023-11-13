@@ -47,7 +47,7 @@ class Dispatcher {
     }
   }
 
-  triggerOnRaf() {
+  triggerOnRaf({ elapsedTime }) {
     const now = window.performance.now();
 
     // Sort the instances by renderPriority
@@ -64,7 +64,7 @@ class Dispatcher {
         // Check if the component should update
         if (timeSinceLastUpdate >= fpsInterval) {
           const delta = timeSinceLastUpdate / 1000; // Convert to seconds
-          instance.onRaf({ delta });
+          instance.onRaf({ delta, elapsedTime });
           instance.lastUpdateTime = now;
         }
       }

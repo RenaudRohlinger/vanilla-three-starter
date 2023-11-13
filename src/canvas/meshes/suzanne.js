@@ -9,7 +9,7 @@ import trail from '@/canvas/utils/trail';
 export class Suzanne extends component(Object3D, {
   raf: {
     renderPriority: 1,
-    fps: 5,
+    fps: 120,
   },
 }) {
   init() {
@@ -83,7 +83,7 @@ export class Suzanne extends component(Object3D, {
     };
 
     this.mesh = new Mesh(this.geometry, this.material);
-    this.mesh.position.y = 0.5;
+    this.mesh.position.y = 1.5;
     this.mesh.updateMatrix();
     this.mesh.matrixAutoUpdate = false;
     renderer.compileAsync(this.mesh, scene).then(() => {
@@ -95,12 +95,13 @@ export class Suzanne extends component(Object3D, {
     folder.add(this.raf, 'fps', 1, 120, 1);
   }
 
-  onRaf({ delta }) {
+  onRaf({ delta, elapsedTime }) {
     if (!this.mesh) {
       return;
     }
     this.mesh.rotation.x += 0.3 * delta;
     this.mesh.rotation.y += 0.3 * delta;
+    this.mesh.position.y = Math.sin(elapsedTime * 0.001) + 0.5;
     this.mesh.updateMatrix();
   }
 }

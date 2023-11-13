@@ -7,7 +7,7 @@ in vec2 v_worldPos;
 // Uniforms
 uniform float u_majorLineWidth, u_minorLineWidth, u_axisLineWidth;
 uniform vec3 u_majorLineColor, u_minorLineColor, u_baseColor;
-uniform vec3 u_xAxisColor, u_yAxisColor, u_zAxisColor;
+uniform vec3 u_xAxisColor, u_zAxisColor;
 uniform float u_majorGridDiv, u_baseAlpha;
 uniform vec2 u_resolution;
 
@@ -81,8 +81,10 @@ void main() {
     }
 
     // Apply axis color to the axis lines
-    vec3 axisColor = mix(u_yAxisColor, u_xAxisColor, step(0.5, abs(v_worldPos.x)));
+    vec3 axisColor = mix(vec3(1.), u_xAxisColor, step(0.5, abs(v_worldPos.x)));
     axisColor = mix(axisColor, u_zAxisColor, step(0.5, abs(v_worldPos.y)));
+
+
     vec3 finalColor = mix(gridColor, axisColor, max(axisLines2.x, axisLines2.y));
 
     if ( max(axisLines2.x, axisLines2.y) > 0.) {

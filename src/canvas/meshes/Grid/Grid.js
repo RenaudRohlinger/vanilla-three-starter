@@ -49,7 +49,6 @@ export class Grid extends component(Object3D, {
         u_minorLineColor: { value: new Color(this.config.minorLineColor) }, // White color
         u_baseColor: { value: new Color(this.config.baseColor) }, // Black color
         u_xAxisColor: { value: new Color(1, 0.3, 0.3) }, // Red color
-        u_yAxisColor: { value: new Color(0, 1, 0) }, // Green color
         u_zAxisColor: { value: new Color(0.3, 0.3, 1) }, // Blue color
       },
     });

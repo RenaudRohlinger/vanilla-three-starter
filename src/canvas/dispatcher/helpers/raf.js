@@ -24,10 +24,10 @@ class Raf {
 
   animate(now) {
     this.time = now;
-
+    const elapsedTime = this.time - this.startTime;
     if (!this.isPaused) {
       requestAnimationFrame(this.animate);
-      dispatcher.triggerOnRaf();
+      dispatcher.triggerOnRaf({ elapsedTime });
     }
   }
 }
