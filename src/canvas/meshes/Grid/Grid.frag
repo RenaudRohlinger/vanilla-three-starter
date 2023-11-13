@@ -46,7 +46,7 @@ void main() {
 
 
     // Minor grid lines
-    float minorLineWidth = min(u_minorLineWidth, u_majorLineWidth);
+    float minorLineWidth = u_minorLineWidth;
     bool minorInvertLine = minorLineWidth > 0.5;
     float minorTargetWidth = minorInvertLine ? 1.0 - minorLineWidth : minorLineWidth;
     vec2 minorDrawWidth = clamp(vec2(minorTargetWidth), uvDeriv, vec2(0.5));

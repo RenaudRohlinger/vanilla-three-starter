@@ -27,6 +27,8 @@ export class Grid extends component(Object3D, {
       baseColor: '#707070',
       majorLineColor: '#ffffff',
       minorLineColor: '#f1f1f1',
+      xAxisColor: '#ff0000',
+      zAxisColor: '#0000ff',
     };
     this.geometry = new PlaneGeometry(10000, 10000, 2, 2);
     this.material = new ShaderMaterial({
@@ -46,9 +48,9 @@ export class Grid extends component(Object3D, {
         u_majorLineColor: { value: new Color(this.config.majorLineColor) }, // White color
         u_minorLineColor: { value: new Color(this.config.minorLineColor) }, // White color
         u_baseColor: { value: new Color(this.config.baseColor) }, // Black color
-        u_xAxisColor: { value: new Color(1, 0, 0) }, // Red color
+        u_xAxisColor: { value: new Color(1, 0.3, 0.3) }, // Red color
         u_yAxisColor: { value: new Color(0, 1, 0) }, // Green color
-        u_zAxisColor: { value: new Color(0, 0, 1) }, // Blue color
+        u_zAxisColor: { value: new Color(0.3, 0.3, 1) }, // Blue color
       },
     });
 
@@ -63,20 +65,20 @@ export class Grid extends component(Object3D, {
   onDebug({ gui }) {
     const folder = gui.addFolder('Grid');
     folder
-      .add(this.material.uniforms.u_majorLineWidth, 'value', 0, 0.05)
+      .add(this.material.uniforms.u_majorLineWidth, 'value', 0, 1)
       .name('Major Line Width');
     folder
-      .add(this.material.uniforms.u_minorLineWidth, 'value', 0, 0.05)
+      .add(this.material.uniforms.u_minorLineWidth, 'value', 0, 0.5)
       .name('Minor Line Width');
     folder
       .add(this.material.uniforms.u_axisLineWidth, 'value', 0, 1)
       .name('Axis Line Width');
 
     folder
-      .add(this.material.uniforms.u_gridDiv, 'value', 0, 20, 1)
+      .add(this.material.uniforms.u_gridDiv, 'value', 1, 20, 1)
       .name('Grid Div');
     folder
-      .add(this.material.uniforms.u_majorGridDiv, 'value', 0, 50, 1)
+      .add(this.material.uniforms.u_majorGridDiv, 'value', 1, 50, 1)
       .name('Major Grid Div');
     folder
       .add(this.material.uniforms.u_baseAlpha, 'value', 0, 1)
@@ -101,6 +103,20 @@ export class Grid extends component(Object3D, {
         this.material.uniforms.u_minorLineColor.value.set(value);
       })
       .name('Minor Line Color');
+
+    folder
+      .addColor(this.config, 'xAxisColor')
+      .onChange((value) => {
+        this.material.uniforms.u_xAxisColor.value.set(value);
+      })
+      .name('X Axis Color');
+
+    folder
+      .addColor(this.config, 'zAxisColor')
+      .onChange((value) => {
+        this.material.uniforms.u_zAxisColor.value.set(value);
+      })
+      .name('Z Axis Color');
   }
   onRaf() {}
   onResize({ width, height }) {}
