@@ -1,4 +1,4 @@
-# Vanilla Three.js Starter
+# Utsubo Three.js Starter
 
 [starter.renaudrohlinger.com](https://starter.renaudrohlinger.com)
 
@@ -7,7 +7,7 @@ template, designed for modern web 3D graphics development. Fairly advanced level
 
 ## Getting Started
 
-The goal of this starter is to make an architecture framework proof. You can find a list of examples with different frameworks in [examples](https://github.com/RenaudRohlinger/vanilla-three-starter/tree/main/src/examples) folder.
+The goal of this starter is to make an architecture framework proof. You can find a list of examples with different frameworks in [examples](https://github.com/utsuboco/utsubo-three-starter/tree/main/src/examples) folder.
 
 ### Installation
 
