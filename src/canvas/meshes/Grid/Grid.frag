@@ -30,7 +30,7 @@ void main() {
     // Axis lines calculation
     float axisLineWidth = max(u_majorLineWidth, u_axisLineWidth);
     
-  vec2 axisDrawWidth = vec2(axisLineWidth) + worldPosDeriv * 0.5; // Adjust for AA
+    vec2 axisDrawWidth = vec2(axisLineWidth) + worldPosDeriv * 0.5; // Adjust for AA
     vec2 axisLineAA = worldPosDeriv * 1.5;
     vec2 axisLines2 = smoothstep(axisDrawWidth + axisLineAA, axisDrawWidth - axisLineAA, abs(v_worldPos.xy * 2.0));
     axisLines2 *= (axisLineWidth / axisDrawWidth);
@@ -44,7 +44,7 @@ void main() {
     vec2 majorGridUV = 1.0 - abs(fract(v_worldPos.xy / div) * 2.0 - 1.0);
     vec2 majorGrid2 = smoothstep(majorDrawWidth + majorLineAA, majorDrawWidth - majorLineAA, majorGridUV);
     majorGrid2 *= (majorLineWidth / majorDrawWidth);
-    majorGrid2 = (majorGrid2 - axisLines2);
+
 
     // Minor grid lines
     float minorLineWidth = min(u_minorLineWidth, u_majorLineWidth);
@@ -56,7 +56,14 @@ void main() {
     minorGridUV = minorInvertLine ? minorGridUV : 1.0 - minorGridUV;
     vec2 minorGrid2 = smoothstep(minorDrawWidth + minorLineAA, minorDrawWidth - minorLineAA, minorGridUV);
     minorGrid2 *= (minorTargetWidth / minorDrawWidth);
-    minorGrid2 = (minorGrid2 - axisLines2);
+
+
+    if ( max(axisLines2.x, axisLines2.y) > 0.) {
+        // If we're drawing axis lines, don't draw grid lines on axis
+        majorGrid2 = vec2(0.);
+        minorGrid2 = vec2(0.);
+    }
+
  // Combine minor and major grid lines
     float minorGrid = mix(minorGrid2.x, 1.0, minorGrid2.y);
     float majorGrid = mix(majorGrid2.x, 1.0, majorGrid2.y);
