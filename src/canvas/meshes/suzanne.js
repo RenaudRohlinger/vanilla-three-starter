@@ -83,8 +83,7 @@ export class Suzanne extends component(Object3D, {
     };
 
     this.mesh = new Mesh(this.geometry, this.material);
-    this.mesh.position.y = 2;
-    this.mesh.scale.setScalar(3);
+    this.mesh.position.y = 0.5;
     this.mesh.updateMatrix();
     this.mesh.matrixAutoUpdate = false;
     renderer.compileAsync(this.mesh, scene).then(() => {

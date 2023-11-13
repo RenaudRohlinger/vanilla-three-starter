@@ -8,7 +8,6 @@ in vec2 v_worldPos;
 uniform float u_majorLineWidth, u_minorLineWidth, u_axisLineWidth;
 uniform vec3 u_majorLineColor, u_minorLineColor, u_baseColor;
 uniform vec3 u_xAxisColor, u_yAxisColor, u_zAxisColor;
-uniform vec3 u_centerColor;
 uniform float u_majorGridDiv, u_baseAlpha;
 uniform vec2 u_resolution;
 

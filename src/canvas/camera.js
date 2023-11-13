@@ -10,7 +10,7 @@ class Camera extends component(PerspectiveCamera) {
   }
 
   init() {
-    this.position.set(30, 30, 30);
+    this.position.set(10, 10, 10);
     this.lookAt(new Vector3(0, 0, 0));
     this.initOrbitControl();
   }

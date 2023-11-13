@@ -26,9 +26,9 @@ export class Grid extends component(Object3D, {
     this.config = {
       baseColor: '#707070',
       majorLineColor: '#ffffff',
-      minorLineColor: '#ffffff',
+      minorLineColor: '#f1f1f1',
     };
-    this.geometry = new PlaneGeometry(1000, 1000, 2, 2);
+    this.geometry = new PlaneGeometry(10000, 10000, 2, 2);
     this.material = new ShaderMaterial({
       side: DoubleSide,
       glslVersion: GLSL3,
@@ -38,17 +38,17 @@ export class Grid extends component(Object3D, {
       fragmentShader,
       uniforms: {
         u_baseAlpha: { value: 0.5 },
-        u_majorLineWidth: { value: 0.05 }, // Example default value, adjust as needed
+        u_majorLineWidth: { value: 0.04 }, // Example default value, adjust as needed
         u_minorLineWidth: { value: 0.01 }, // Example default value
-        u_axisLineWidth: { value: 0.2 }, // Example default value
+        u_axisLineWidth: { value: 0.15 }, // Example default value
         u_majorGridDiv: { value: 10.0 }, // Example default value
+        u_gridDiv: { value: 4.0 }, // Example default value
         u_majorLineColor: { value: new Color(this.config.majorLineColor) }, // White color
         u_minorLineColor: { value: new Color(this.config.minorLineColor) }, // White color
         u_baseColor: { value: new Color(this.config.baseColor) }, // Black color
         u_xAxisColor: { value: new Color(1, 0, 0) }, // Red color
         u_yAxisColor: { value: new Color(0, 1, 0) }, // Green color
         u_zAxisColor: { value: new Color(0, 0, 1) }, // Blue color
-        u_centerColor: { value: new Color(1, 1, 1) }, // White color
       },
     });
 
@@ -71,10 +71,13 @@ export class Grid extends component(Object3D, {
     folder
       .add(this.material.uniforms.u_axisLineWidth, 'value', 0, 1)
       .name('Axis Line Width');
-    folder
-      .add(this.material.uniforms.u_majorGridDiv, 'value', 0, 100, 1)
-      .name('Major Grid Div');
 
+    folder
+      .add(this.material.uniforms.u_gridDiv, 'value', 0, 20, 1)
+      .name('Grid Div');
+    folder
+      .add(this.material.uniforms.u_majorGridDiv, 'value', 0, 50, 1)
+      .name('Major Grid Div');
     folder
       .add(this.material.uniforms.u_baseAlpha, 'value', 0, 1)
       .name('Base Alpha');
