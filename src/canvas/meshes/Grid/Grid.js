@@ -8,7 +8,7 @@ import {
   ShaderMaterial,
 } from 'three';
 
-import { component } from '@/canvas/dispatcher';
+import { component, updateComponentRegistry } from '@/canvas/dispatcher';
 import renderer from '@/canvas/renderer';
 import scene from '@/canvas/scene';
 
@@ -56,61 +56,63 @@ export class Grid extends component(Object3D, {
     this.mesh = new Mesh(this.geometry, this.material);
     this.mesh.rotation.x = Math.PI / 2;
     this.mesh.updateMatrix();
+    this.mesh.matrixWorld.copy(this.matrixWorld);
 
     renderer.compileAsync(this.mesh, scene).then(() => {
       this.add(this.mesh);
+      scene.add(this);
     });
   }
   onDebug({ gui }) {
-    const folder = gui.addFolder('Grid');
-    folder
+    this.gui = gui.addFolder('Grid');
+    this.gui
       .add(this.material.uniforms.u_majorLineWidth, 'value', 0, 1)
       .name('Major Line Width');
-    folder
+    this.gui
       .add(this.material.uniforms.u_minorLineWidth, 'value', 0, 0.5)
       .name('Minor Line Width');
-    folder
+    this.gui
       .add(this.material.uniforms.u_axisLineWidth, 'value', 0, 1)
       .name('Axis Line Width');
 
-    folder
+    this.gui
       .add(this.material.uniforms.u_gridDiv, 'value', 1, 20, 1)
       .name('Grid Div');
-    folder
+    this.gui
       .add(this.material.uniforms.u_majorGridDiv, 'value', 1, 50, 1)
       .name('Major Grid Div');
-    folder
+    this.gui
       .add(this.material.uniforms.u_baseAlpha, 'value', 0, 1)
       .name('Base Alpha');
-    folder
+    this.gui
       .addColor(this.config, 'baseColor')
       .onChange((value) => {
         this.material.uniforms.u_baseColor.value.set(value);
       })
       .name('Base Color');
 
-    folder
+    this.gui
       .addColor(this.config, 'majorLineColor')
       .onChange((value) => {
         this.material.uniforms.u_majorLineColor.value.set(value);
       })
       .name('Major Line Color');
 
-    folder
+    this.gui
       .addColor(this.config, 'minorLineColor')
       .onChange((value) => {
         this.material.uniforms.u_minorLineColor.value.set(value);
       })
       .name('Minor Line Color');
 
-    folder
+    this.gui
       .addColor(this.config, 'xAxisColor')
       .onChange((value) => {
         this.material.uniforms.u_xAxisColor.value.set(value);
       })
       .name('X Axis Color');
 
-    folder
+    this.gui
       .addColor(this.config, 'zAxisColor')
       .onChange((value) => {
         this.material.uniforms.u_zAxisColor.value.set(value);
@@ -118,5 +120,18 @@ export class Grid extends component(Object3D, {
       .name('Z Axis Color');
   }
   onRaf() {}
-  onResize({ width, height }) {}
+  onResize() {}
+  dispose() {
+    super.dispose();
+    if (this.gui) {
+      this.gui.destroy();
+    }
+  }
+}
+
+// Minimal HMR setup
+if (import.meta.hot) {
+  import.meta.hot.accept((newModule) => {
+    updateComponentRegistry('Grid', newModule);
+  });
 }

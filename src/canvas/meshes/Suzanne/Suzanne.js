@@ -1,10 +1,11 @@
 import { Mesh, MeshMatcapMaterial, Object3D } from 'three';
 
-import { component } from '@/canvas/dispatcher';
+import { component, updateComponentRegistry } from '@/canvas/dispatcher';
 import loader from '@/canvas/loader';
 import renderer from '@/canvas/renderer';
 import scene from '@/canvas/scene';
 import trail from '@/canvas/utils/trail';
+
 
 export class Suzanne extends component(Object3D, {
   raf: {
@@ -27,7 +28,7 @@ export class Suzanne extends component(Object3D, {
 
       shader.vertexShader = shader.vertexShader.replace(
         '#include <common>',
-        `
+        /* glsl */`
         #include <common>
         uniform sampler2D uTrail;
         varying vec2 vUv;
@@ -40,7 +41,7 @@ export class Suzanne extends component(Object3D, {
 
       shader.vertexShader = shader.vertexShader.replace(
         '#include <displacementmap_vertex>',
-        `
+        /* glsl */`
         #include <displacementmap_vertex>
         vec4 pos = modelMatrix * vec4(position, 1.0);
         vec4 clipSpace = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
@@ -53,7 +54,7 @@ export class Suzanne extends component(Object3D, {
 
       shader.vertexShader = shader.vertexShader.replace(
         '#include <project_vertex>',
-        `
+        /* glsl */`
         #include <project_vertex>
         vForce = force;
         vUv = uv;
@@ -63,7 +64,7 @@ export class Suzanne extends component(Object3D, {
 
       shader.fragmentShader = shader.fragmentShader.replace(
         '#include <common>',
-        `
+        /* glsl */`
         #include <common>
         uniform sampler2D uTrail;
         varying vec2 vUv;
@@ -75,7 +76,7 @@ export class Suzanne extends component(Object3D, {
 
       shader.fragmentShader = shader.fragmentShader.replace(
         '#include <normal_fragment_maps>',
-        `
+        /* glsl */`
         #include <normal_fragment_maps>
         diffuseColor.rgb += vForce * 5.5;
         `
@@ -88,11 +89,12 @@ export class Suzanne extends component(Object3D, {
     this.mesh.matrixAutoUpdate = false;
     renderer.compileAsync(this.mesh, scene).then(() => {
       this.add(this.mesh);
+      scene.add(this);
     });
   }
   onDebug({ gui }) {
-    const folder = gui.addFolder('Suzanne');
-    folder.add(this.raf, 'fps', 1, 120, 1);
+    this.gui = gui.addFolder('Suzanne');
+    this.gui.add(this.raf, 'fps', 1, 120, 1);
   }
 
   onRaf({ delta, elapsedTime }) {
@@ -104,4 +106,17 @@ export class Suzanne extends component(Object3D, {
     this.mesh.position.y = Math.sin(elapsedTime * 0.001) + 0.5;
     this.mesh.updateMatrix();
   }
+  dispose() {
+    super.dispose();
+    if (this.gui) {
+      this.gui.destroy();
+    }
+  }
+}
+
+// Minimal HMR setup
+if (import.meta.hot) {
+  import.meta.hot.accept((newModule) => {
+    updateComponentRegistry('Suzanne', newModule);
+  });
 }

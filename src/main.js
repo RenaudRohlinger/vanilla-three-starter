@@ -6,6 +6,8 @@ import { component } from '@/canvas/dispatcher';
 import loader from '@/canvas/loader';
 import renderer from '@/canvas/renderer';
 import scene from '@/canvas/scene';
+import { Grid } from '@/canvas/meshes/Grid/Grid';
+import { Suzanne } from '@/canvas/meshes/Suzanne/Suzanne';
 // import postfx from '@/canvas/postfx/postfx';
 
 let stats = null;
@@ -30,13 +32,20 @@ class Site extends component(null, {
     // postprocess
     // postfx.render(scene, camera);
   }
+  onAfterRaf() {
+    if (!stats) return
+    stats.update();
+  }
   onDebug() {
     if (stats) {
-      document.body.appendChild(stats.container);
-      stats.init(renderer.domElement);
+      document.body.appendChild(stats.dom);
+      stats.init(renderer);
     }
   }
-  onLoadEnd() {}
+  onLoadEnd() {
+    new Grid()
+    new Suzanne()
+  }
 }
 
 function init({ debug = false } = {}) {
@@ -46,14 +55,7 @@ function init({ debug = false } = {}) {
 
     import('stats-gl').then((module) => {
       stats = new module.default();
-      stats.init(renderer.domElement);
-      document.body.appendChild(stats.container);
-      scene.onBeforeRender = function () {
-        stats.begin();
-      };
-      scene.onAfterRender = function () {
-        stats.end();
-      };
+
       import('lil-gui').then((module) => {
         const gui = new module.GUI();
         // Do something with gui

@@ -78,6 +78,14 @@ export class Plane extends component(Object3D, {
   onResize({width, height, ratio}) {}
   onDebug({gui}) { // lil-gui debug is now accessible }
 }
+
+// Minimal HMR setup
+if (import.meta.hot) {
+  import.meta.hot.accept((newModule) => {
+    updateComponentRegistry('Plane', newModule);
+  });
+}
+
 ```
 
 Any custom event can be added and gets emitted like so:

@@ -12,11 +12,11 @@ dependencies:
     specifier: ^0.19.1
     version: 0.19.1
   stats-gl:
-    specifier: ^1.0.5
-    version: 1.0.5
+    specifier: ^2.0.1
+    version: 2.0.1
   three:
-    specifier: ^0.158.0
-    version: 0.158.0
+    specifier: ^0.159.0
+    version: 0.159.0
 
 devDependencies:
   eslint:
@@ -1508,8 +1508,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /stats-gl@1.0.5:
-    resolution: {integrity: sha512-XimMxvwnf1Qf5KwebhcoA34kcX+fWEkIl0QjNkCbu4IpoyDMMsOajExn7FIq5w569k45+LhmsuRlGSrsvmGdNw==}
+  /stats-gl@2.0.1:
+    resolution: {integrity: sha512-EhFm1AxoSBK3MflkFawZ4jmOX1dWu0nBAtCpvGxGsondEvCpsohbpRpM8pi8UAcxG5eRsDsCiRcxdH20j3Rp9A==}
     dev: false
 
   /string.prototype.trim@1.2.8:
@@ -1570,8 +1570,8 @@ packages:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
     dev: true
 
-  /three@0.158.0:
-    resolution: {integrity: sha512-TALj4EOpdDPF1henk2Q+s17K61uEAAWQ7TJB68nr7FKxqwyDr3msOt5IWdbGm4TaWKjrtWS8DJJWe9JnvsWOhQ==}
+  /three@0.159.0:
+    resolution: {integrity: sha512-eCmhlLGbBgucuo4VEA9IO3Qpc7dh8Bd4VKzr7WfW4+8hMcIfoAVi1ev0pJYN9PTTsCslbcKgBwr2wNZ1EvLInA==}
     dev: false
 
   /tsconfig-paths@3.14.2:
