@@ -84,7 +84,6 @@ export class Suzanne extends component(Object3D, {
     };
 
     this.mesh = new Mesh(this.geometry, this.material);
-    this.mesh.position.y = 1.5;
     this.mesh.updateMatrix();
     this.mesh.matrixAutoUpdate = false;
     renderer.compileAsync(this.mesh, scene).then(() => {
@@ -96,8 +95,7 @@ export class Suzanne extends component(Object3D, {
     this.gui = gui.addFolder('Suzanne');
     this.gui.add(this.raf, 'fps', 1, 120, 1);
   }
-
-  onRaf({ delta, elapsedTime }) {
+  onThrottle({ delta, elapsedTime }) {
     if (!this.mesh) {
       return;
     }

@@ -91,15 +91,23 @@ class Dispatcher {
       }
     }
 
-    const maxDelta = 0.033; // Maximum delta time for 30 FPS
+    let maxDelta = 0.033; // Maximum delta time for 30 FPS
     const globalDelta = Math.min(
       (now - this.globalLastUpdateTime) / 1000,
       maxDelta
     );
     this.globalLastUpdateTime = now;
 
+   
     for (let instance of sortedInstances) {
-      if (typeof instance.onRaf === 'function') {
+
+      const hasRaf = typeof instance.onRaf === 'function';
+      const hasThrottle = typeof instance.onThrottle === 'function';
+
+      if (hasRaf || hasThrottle) {
+        if (hasThrottle) {
+          maxDelta = 1 / instance.raf.fps;
+        }
         const timeSinceLastUpdate = Math.min(
           now - (instance.lastUpdateTime || now),
           maxDelta * 1000
@@ -111,8 +119,8 @@ class Dispatcher {
           (timeSinceLastUpdate % fpsInterval) / fpsInterval;
         if (instance.raf.fps === Infinity) {
           throttleInterpolation = 0; // If the instance is set to update every frame, the interpolation is not needed
-        } else if (typeof instance.onThrottle === 'function') {
-          if (Math.round(timeSinceLastUpdate) >= Math.round(fpsInterval)) {
+        } else if (hasThrottle) {
+          if (Math.floor(timeSinceLastUpdate) >= Math.floor(fpsInterval)) {
             // If the component should update, reset throttleInterpolation to 1
             throttleInterpolation = 1;
 
@@ -125,11 +133,13 @@ class Dispatcher {
           }
         }
 
-        instance.onRaf({
-          delta: globalDelta,
-          throttleInterpolation,
-          elapsedTime,
-        });
+        if (hasRaf) {
+          instance.onRaf({
+            delta: globalDelta,
+            throttleInterpolation,
+            elapsedTime,
+          });
+        }
       }
     }
 
