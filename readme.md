@@ -1,4 +1,4 @@
-# Utsubo Three.js Starter
+# Three.js Vanilla Starter
 
 [starter.renaudrohlinger.com](https://starter.renaudrohlinger.com)
 
@@ -53,7 +53,7 @@ import {
   Object3D,
 } from 'three';
 
-import { component } from '@/canvas/dispatcher';
+import { component, updateComponentRegistry } from '@/canvas/dispatcher';
 import renderer from '@/canvas/renderer';
 import scene from '@/canvas/scene';
 
@@ -68,6 +68,7 @@ export class Plane extends component(Object3D, {
     this.mesh.updateMatrix(); // required since we disabled by default
     renderer.compileAsync(this.mesh, scene).then(() => { // better compile for GPU
       this.add(this.mesh);
+      scene.add(this)
     });
   }
 
