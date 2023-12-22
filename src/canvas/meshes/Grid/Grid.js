@@ -119,8 +119,8 @@ export class Grid extends component(Object3D, {
       })
       .name('Z Axis Color');
   }
-  onRaf() {}
-  onResize() {}
+  onRaf() { }
+  onResize() { }
   dispose() {
     super.dispose();
     if (this.gui) {
